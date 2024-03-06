@@ -3,3 +3,9 @@
 *.sqlite3
 *.db
 *.db3
+
+# Binares and Executables
+bin/
+obj/
+*.exe
+*.dll
