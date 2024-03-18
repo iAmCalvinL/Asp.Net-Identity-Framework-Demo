@@ -1,12 +1,13 @@
 using identity_demo.Dto;
 using identity_demo.Interfaces;
 using identity_demo.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace identity_demo.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/post")]
     public class PostController : ControllerBase
     {
         private readonly IPostRespository _postRepository;
@@ -48,6 +49,7 @@ namespace identity_demo.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(422)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<IActionResult> CreateBlogPost([FromBody] BlogPostDto blogPostDto)
         {
             if (blogPostDto == null) return BadRequest(ModelState);
@@ -76,6 +78,7 @@ namespace identity_demo.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<IActionResult> UpdateBlogPost([FromBody] UpdateBlogPostDto updateBlogPostDto)
         {
             if (updateBlogPostDto == null) return BadRequest(ModelState);
@@ -106,6 +109,7 @@ namespace identity_demo.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
+        [Authorize]
         public async Task<IActionResult> DeleteBlogPost(int blogPostId)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
